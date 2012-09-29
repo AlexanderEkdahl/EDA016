@@ -3,8 +3,11 @@ import se.lth.cs.ptdc.images.ImageGUI;
 
 public class ImageProcessor {
 	public static void main(String[] args) {
-		ImageFilter[] filters = new ImageFilter[1];
+		ImageFilter[] filters = new ImageFilter[5];
 		filters[0] = new IdentityFilter("Identity Filter");
+		filters[1] = new BlueFilter("Blue Filter");
+		filters[2] = new InvertFilter("Invert Filter");
+		filters[3] = new GrayscaleFilter("Grayscale Filter");
 		new ImageGUI(filters);
 	}
 }
