@@ -30,14 +30,12 @@ public class Turtle {
 
 	/** Går rakt framåt n pixlar i den riktning som huvudet pekar */
 	public void forward(int n) {
-		w.moveTo((int)Math.round(x), (int)Math.round(y));
+		if(drawing)
+			w.moveTo((int)Math.round(x), (int)Math.round(y));
 		x = x + n * Math.cos(direction);
 		y = y - n * Math.sin(direction);
-		if(drawing) {
+		if(drawing)
 			w.lineTo((int)Math.round(x), (int)Math.round(y));
-		} else {
-			w.moveTo((int)Math.round(x), (int)Math.round(y));
-		}
 	}
 
 	/** Vrider beta grader åt vänster runt pennan */
