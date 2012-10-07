@@ -8,6 +8,7 @@ public class ImageProcessor {
 		filters[1] = new BlueFilter("Blue Filter");
 		filters[2] = new InvertFilter("Invert Filter");
 		filters[3] = new GrayscaleFilter("Grayscale Filter");
+		filters[4] = new ContrastFilter("Contrast Filter");
 		new ImageGUI(filters);
 	}
 }

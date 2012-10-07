@@ -1,15 +1,37 @@
 import se.lth.cs.ptdc.window.SimpleWindow;
-import se.lth.cs.ptdc.shapes.ShapeList;
+import java.io.File;
+import java.util.Scanner;
 
 public class ShapeTest {
 	public static void main(String[] args) {
 		SimpleWindow w = new SimpleWindow(600, 600, "ShapeTest");
 		ShapeList shapes = new ShapeList();
-		//shapes.insert(new Square(100, 300, 100));
-		//shapes.insert(new Triangle(400, 200, 100));
-		//shapes.insert(new Circle(400, 400, 50));
-		//shapes.insert(new Square(450, 450, 50));
-		//shapes.insert(new Square(200, 200, 35));
+		CommandDispatcher cd = new CommandDispatcher(w, shapes);
+		File file = new File("shapedata.txt");
+
+		try {
+			Scanner scan = new Scanner(file);
+
+			while(scan.hasNext()) {
+				String s = scan.next();
+
+				if(s.equals("S")) {
+					shapes.insert(new Square(scan.nextInt(), scan.nextInt(), scan.nextInt()));
+				}
+				else if(s.equals("T")) {
+					shapes.insert(new Triangle(scan.nextInt(), scan.nextInt(), scan.nextInt()));
+				}
+				else if(s.equals("C")) {
+					shapes.insert(new Circle(scan.nextInt(), scan.nextInt(), scan.nextInt()));
+				}
+			}
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+
 		shapes.draw(w);
+
+		cd.mainLoop();
 	}
 }
