@@ -57,19 +57,15 @@ public class ContrastFilter extends ImageFilter {
 			if(doneLow && doneHigh)
 				break;
 		}
-		
+
 		for (int i = 0; i < height; ++i) {
 			for (int j = 0; j < width; ++j) {
 				if(intensity[i][j] < lowCut)
 					outPixels[i][j] = grayLevels[0];
-				else if(intensity[i][j] > highCut)
+				else if(intensity[i][j] >= highCut)
 					outPixels[i][j] = grayLevels[255];
 				else {
-					try {
-						outPixels[i][j] = grayLevels[255*(intensity[i][j] - lowCut) / (highCut - lowCut)];
-					} catch (java.lang.ArithmeticException e) {
-						outPixels[i][j] = new Color(255,0,9);
-					}
+					outPixels[i][j] = grayLevels[255*(intensity[i][j] - lowCut) / (highCut - lowCut)];
 				}
 			}
 		}
