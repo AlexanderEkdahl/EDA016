@@ -4,14 +4,14 @@ import java.util.ArrayList;
 
 public class ShapeList {
 	private ArrayList<Shape> shapes;
-	
+
 	public ShapeList() {
 		shapes = new ArrayList<Shape>();
 	}
 
 	/**
 	 * Lägger in en figur i listan.
-	 * 
+	 *
 	 * @param s
 	 *            figuren som ska läggas in i listan
 	 */
@@ -21,7 +21,7 @@ public class ShapeList {
 
 	/**
 	 * Ritar upp figurerna i listan.
-	 * 
+	 *
 	 * @param w
 	 *            fönstret där figurerna ritas
 	 */
@@ -35,7 +35,7 @@ public class ShapeList {
 	 * Tar reda på en figur som ligger nära punkten xc,yc. Om flera figurer
 	 * ligger nära så returneras den första som hittas, om ingen figur ligger
 	 * nära returneras null.
-	 * 
+	 *
 	 * @param xc
 	 *            x-koordinaten
 	 * @param yc
