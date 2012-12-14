@@ -24,6 +24,7 @@ public class CardDeck {
 			cards[n] = cards[i];
 			cards[i] = c;
 		}
+		current = 51;
 	}
 	
 	public boolean moreCards() {
