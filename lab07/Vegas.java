@@ -17,7 +17,7 @@ public class Vegas {
 				}
 			}
 		}
-		
+
 		System.out.println((double)(iterations-failed)/iterations);
 	}
 }
