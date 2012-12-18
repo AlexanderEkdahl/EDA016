@@ -5,7 +5,7 @@ public class CardDeck {
 	private Card[] cards;
 	private int current;
 	private static Random rand = new Random();
-	
+
 	public CardDeck() {
 		cards = new Card[52];
 		current = 0;
@@ -16,7 +16,7 @@ public class CardDeck {
 			}
 		}
 	}
-	
+
 	public void shuffle() {
 		for(int i = 51; i > 0; i--) {
 			int n = rand.nextInt(i+1);
@@ -24,13 +24,13 @@ public class CardDeck {
 			cards[n] = cards[i];
 			cards[i] = c;
 		}
-		current = 51;
+		current = 52;
 	}
-	
+
 	public boolean moreCards() {
 		return (current > 0);
 	}
-	
+
 	public Card getCard() {
 		current--;
 		return cards[current];
