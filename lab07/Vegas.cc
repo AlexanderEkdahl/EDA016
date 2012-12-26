@@ -3,7 +3,7 @@
 
 using namespace std;
 
-#define ITERATIONS 10000000
+#define ITERATIONS 50000
 
 enum { CLUB, DIAMOND, HEART, SPADE };
 

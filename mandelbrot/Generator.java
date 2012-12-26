@@ -14,20 +14,20 @@ public class Generator {
 
   public void render(MandelbrotGUI gui) {
     gui.disableInput();
-    int pxs = 1;
+    int res = 1;
 
     switch (gui.getResolution()) {
     case MandelbrotGUI.RESOLUTION_HIGH:
-      pxs = 3;
+      res = 3;
       break;
     case MandelbrotGUI.RESOLUTION_MEDIUM:
-      pxs = 5;
+      res = 5;
       break;
     case MandelbrotGUI.RESOLUTION_LOW:
-      pxs = 7;
+      res = 7;
       break;
     case MandelbrotGUI.RESOLUTION_VERY_LOW:
-      pxs = 9;
+      res = 9;
       break;
     }
 
@@ -35,11 +35,11 @@ public class Generator {
         gui.getMinimumReal(), gui.getMaximumReal(),
         gui.getMinimumImag(), gui.getMaximumImag(),
         gui.getWidth(), gui.getHeight());
-    Color[][] picture = new Color[gui.getHeight() / pxs + 1][gui.getWidth() / pxs + 1];
+    Color[][] picture = new Color[gui.getHeight() / res + 1][gui.getWidth() / res + 1];
 
-    for (int i = 0; i < gui.getHeight() / pxs; i++) {
-      for (int j = 0; j < gui.getWidth() / pxs; j++) {
-        Complex c = complex[pxs / 2 + i * pxs][pxs / 2 + j * pxs];
+    for (int i = 0; i < gui.getHeight() / res; i++) {
+      for (int j = 0; j < gui.getWidth() / res; j++) {
+        Complex c = complex[res / 2 + i * res][res / 2 + j * res];
         Complex z = new Complex(0, 0);
         int n = 0;
 
@@ -51,13 +51,8 @@ public class Generator {
 
         switch(gui.getMode()) {
         case MandelbrotGUI.MODE_COLOR:
-          if(n < ITERATIONS - 1) {
-            picture[i][j] = hues[n];
-          } else {
-            picture[i][j] = hues[ITERATIONS - 1];
-          }
+          picture[i][j] = hues[n];
         break;
-
         case MandelbrotGUI.MODE_BW:
           if(z.getAbs2() <= 4) {
             picture[i][j] = Color.black;
@@ -69,7 +64,7 @@ public class Generator {
       }
     }
 
-    gui.putData(picture, pxs, pxs);
+    gui.putData(picture, res, res);
     gui.enableInput();
   }
 
