@@ -2,8 +2,8 @@ import java.awt.Color;
 import se.lth.cs.ptdc.fractal.MandelbrotGUI;
 
 public class Generator {
-  static final int ITERATIONS = 255;
-  Color[] hues;
+  static final int ITERATIONS = 360;
+  private Color[] hues;
 
   public Generator() {
     hues = new Color[ITERATIONS];
@@ -37,6 +37,9 @@ public class Generator {
         gui.getWidth(), gui.getHeight());
     Color[][] picture = new Color[gui.getHeight() / res + 1][gui.getWidth() / res + 1];
 
+    int[][] pass = new int[gui.getHeight() / res + 1][gui.getWidth() / res + 1];
+    int[] histogram = new int[ITERATIONS]; // could be out of bounds? off by one... iter + 1?
+
     for (int i = 0; i < gui.getHeight() / res; i++) {
       for (int j = 0; j < gui.getWidth() / res; j++) {
         Complex c = complex[res / 2 + i * res][res / 2 + j * res];
@@ -51,16 +54,33 @@ public class Generator {
 
         switch(gui.getMode()) {
         case MandelbrotGUI.MODE_COLOR:
-          picture[i][j] = hues[n];
-        break;
+          histogram[n]++;
+          pass[i][j] = n;
+          break;
         case MandelbrotGUI.MODE_BW:
           if(z.getAbs2() <= 4) {
             picture[i][j] = Color.black;
           } else {
             picture[i][j] = Color.white;
           }
-        break;
         }
+      }
+    }
+
+    int total = 0;
+    for (int n = 0; n < ITERATIONS; n++) {
+      total += histogram[n];
+    }
+
+    for (int i = 0; i < gui.getHeight() / res; i++) {
+      for (int j = 0; j < gui.getWidth() / res; j++) {
+        float hue = 0f;
+
+        for (int n = 0; n < pass[i][j]; n++) {
+          hue += (float)histogram[n] / total;
+        }
+
+        picture[i][j] = hues[(int)(hue * ITERATIONS)];
       }
     }
 
